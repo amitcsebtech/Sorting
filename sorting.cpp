@@ -1,4 +1,4 @@
-BUbble Sort
+// BUbble Sort
 #include<bits/stdc++.h>
 using namespace std;
 void bubbleSort(int arr[],int n);
@@ -41,7 +41,10 @@ int main(){
 }
 
 
-Selection Sort
+
+
+
+// Selection Sort
 #include<bits/stdc++.h>
 using namespace std;
 void selectionSort(int arr[],int n);
@@ -85,7 +88,9 @@ int main(){
 
 
 
-Insertion Sort
+
+
+// Insertion Sort
 #include<bits/stdc++.h>
 using namespace std;
 void insertionSort(int arr[],int n);
