@@ -247,3 +247,74 @@ int main(){
 
     return 0;
 }
+
+
+
+
+// Radix Sort
+#include<bits/stdc++.h>
+using namespace std;
+
+void radixSort(int arr[],int n);
+int maxElement(int arr[],int n);
+void countSort(int arr[],int n,int place);
+void radixSort(int arr[],int n){
+    int maxVal=maxElement(arr,n);
+    for(int place=1; maxVal/place>0; place=place*10){
+        countSort(arr,n,place);//here place is define the ones or tense place of digit
+    }
+
+
+}
+int maxElement(int arr[],int n){
+    int maxVal=arr[0];
+    for(int i=1; i<n; i++){
+        if(arr[i]>maxVal){
+            maxVal=arr[i];
+        }
+    }
+    return maxVal;
+}
+void countSort(int arr[],int n, int place){
+    int count[10]={0};//all the index is filled with zero
+    int temp[n];
+    for(int i=0; i<n; i++){
+        count[(arr[i]/place)%10]++;//(arr[i]/place)%10 give the ones place digit or tense place digit
+
+    }
+    //update the count array for correct position of digit 
+    for(int i=1; i<10; i++){
+        count[i]=count[i]+count[i-1];
+    }
+    //here to store the digit in correct position in temp array
+    for(int i=n-1; i>=0; i--){//storing the digit from last
+        int idx=count[(arr[i]/place)%10]-1;//this give the correct position of digit
+        temp[idx]=arr[i];
+        count[(arr[i]/place)%10]--;//update the position of digit
+    }
+    for(int i=0; i<n; i++){
+        arr[i]=temp[i];
+    }
+}
+
+int main(){
+    int n;
+    cout<<"Enter a size of array = ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter an element of array:\n";
+    for(int i=0; i<n; i++){
+        cin>>arr[i];
+    }
+    cout<<"\nBefore Radix sort\n";
+    for(int i=0; i<n; i++){
+        cout<<arr[i]<<" ";
+    }
+    radixSort(arr,n);
+    cout<<"\nAfter Radix sort\n";
+    for(int i=0; i<n; i++){
+        cout<<arr[i]<<" ";
+    }
+
+    return 0;
+}
