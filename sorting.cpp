@@ -128,3 +128,122 @@ int main(){
 
     return 0;
 }
+
+
+
+
+
+// Quick Sort
+#include<bits/stdc++.h>
+using namespace std;
+int partion(int arr[],int low, int high);
+void quickSort(int arr[],int low,int high);
+void quickSort(int arr[],int low,int high){
+if(low<high){
+    int pvoitIdx=partion(arr,low,high);
+    quickSort(arr,low,pvoitIdx-1);
+    quickSort(arr,pvoitIdx+1,high);
+}
+}
+int partion(int arr[],int low,int high){
+    int i=low-1;
+    int poivtElement=arr[high];
+    for(int j=low; j<high; j++){
+        if(arr[j]<poivtElement){
+            i++;
+            int temp=arr[j];
+            arr[j]=arr[i];
+            arr[i]=temp;
+        }
+    }
+    i++;
+    int temp=arr[i];
+    arr[i]=poivtElement;
+    arr[high]=temp;
+    return i;
+}
+int main(){
+    int n;
+    cout<<"Enter a size of array = ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter an element of array:\n";
+    for(int i=0; i<n; i++){
+        cin>>arr[i];
+    }
+    cout<<"\nBefore Quick sort\n";
+    for(int i=0; i<n; i++){
+        cout<<arr[i]<<" ";
+    }
+    quickSort(arr,0,n-1);
+    cout<<"\nAfter Quick sort\n";
+    for(int i=0; i<n; i++){
+        cout<<arr[i]<<" ";
+    }
+
+    return 0;
+}
+
+
+
+
+// Merge Sort
+#include<bits/stdc++.h>
+using namespace std;
+void merge(int arr[],int low,int mid, int high);
+void mergeSort(int arr[],int low,int high);
+void mergeSort(int arr[],int low,int high){
+if(low<high){
+    int mid=low+(high-low)/2;
+    mergeSort(arr,low,mid);
+    mergeSort(arr,mid+1,high);
+    merge(arr,low,mid,high);
+}
+}
+void merge(int arr[],int low,int mid,int high){
+int idx1=low,idx2=mid+1;
+int size=high-low+1;
+int temp[size],k=0;
+while(idx1<=mid&&idx2<=high){
+    if(arr[idx1]<arr[idx2]){
+        temp[k]=arr[idx1];
+        k++,idx1++;
+    }
+    else{
+        temp[k]=arr[idx2];
+        k++,idx2++;
+    }
+}
+while(idx1<=mid){
+        temp[k]=arr[idx1];
+        k++,idx1++;
+}
+while(idx2<=high){
+        temp[k]=arr[idx2];
+        k++,idx2++;
+}
+for(int k=0,i=low; k<size; k++,i++){
+    arr[i]=temp[k];
+}
+}
+int main(){
+    int n;
+    cout<<"Enter a size of array = ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter an element of array:\n";
+    for(int i=0; i<n; i++){
+        cin>>arr[i];
+    }
+    cout<<"\nBefore Merge sort\n";
+    for(int i=0; i<n; i++){
+        cout<<arr[i]<<" ";
+    }
+    mergeSort(arr,0,n-1);
+    cout<<"\nAfter Merge sort\n";
+    for(int i=0; i<n; i++){
+        cout<<arr[i]<<" ";
+    }
+
+    return 0;
+}
